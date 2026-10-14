@@ -1,0 +1,21 @@
+### 需要删除表清单
+
+dataassetschedulerserver
+apimerge
+Apollo
+datacatalog
+dataassetserver
+datausageserver
+RiskDetection
+riskVisualizationServer
+siem
+assetwarehousecommon
+assetwarehouseserver
+grpc-protoc
+grpc-service-framework
+warehouse_identify
+taskinference
+taskschedule
+commonlib
+logrich
+datachanule
