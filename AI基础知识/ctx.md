@@ -89,3 +89,38 @@ codex -c 'model_provider="openai"' login status
 ```
 codex -c 'model_provider="openai"' -m gpt-6-astra
 ```
+
+## 补充：重启后快速使用
+
+### 本地 Mac 执行（每次开机或网络代理重启后）
+
+先开启 Mac 网络代理软件的系统代理，再执行下面命令，自动读取当前代理端口并后台转发，无需手动修改 `51926`。
+
+```bash
+bash "/Users/wjx/Desktop/知识库/AI基础知识/codex-mac-tunnel.sh"
+```
+
+首次使用脚本前，先关闭旧的手动 `21926` 转发窗口。使用期间保持 Mac 在线、代理运行。
+
+### 远端执行（首次配置一次，已配置过无需重复）
+
+```bash
+cat >> /root/.bashrc <<'EOF'
+
+# Codex through the Mac SSH proxy tunnel
+codex() {
+  HTTP_PROXY=http://127.0.0.1:21926 \
+  HTTPS_PROXY=http://127.0.0.1:21926 \
+  NO_PROXY=localhost,127.0.0.1,::1 \
+  command codex -c 'model_provider="openai"' -m gpt-6-astra "$@"
+}
+EOF
+
+source /root/.bashrc
+```
+
+### 远端执行（以后新终端直接启动）
+
+```bash
+codex
+```
