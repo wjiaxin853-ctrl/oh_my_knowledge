@@ -42,7 +42,15 @@ ssh -N \
   -R 127.0.0.1:21926:127.0.0.1:51926 \
   root@10.74.167.125
 ```
-
+后台执行：
+```
+ssh -fN \
+  -o ExitOnForwardFailure=yes \
+  -o ServerAliveInterval=15 \
+  -o ServerAliveCountMax=3 \
+  -R 127.0.0.1:21926:127.0.0.1:51926 \
+  root@10.74.167.125
+```
 其中这个 51926是 mac 的代理端口，ctx重启会改变，用 scutil --proxy 重新确认即可
 当前的是：
 
@@ -123,4 +131,9 @@ source /root/.bashrc
 
 ```bash
 codex
+```
+
+增加远程连接，突破沙盒限制权限
+```
+codex -c 'sandbox_workspace_write.network_access=true' "你的指令"
 ```
